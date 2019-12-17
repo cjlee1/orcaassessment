@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+      $(document).ready(function(){
+             $("#horse-selfie").change(function(){
+                   var length=this.files.length;
+                        if(length){
+                            changeBackgroundDiv(this);
+                         }
+                        else{
+                            return False;
+                        }
+                });
+       });
+     
+      // Creating the function
+      function changeBackgroundDiv(img){
+            var file = img.files[0];
+            var imagefile = file.type;
+            var match= ["image/jpeg","image/png","image/jpg"];
+                  if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+                        alert("Invalid File Extension; image file needed");
+                  }else{
+                        var reader = new FileReader();
+                        reader.onload = imageLoaded;
+                        reader.readAsDataURL(img.files[0]);
+                  }
+            function imageLoaded(e) {
+                  $('body').css({ 'background-image': "url(" + e.target.result + ")" });
+           
+                  }     
+            }
+</script>
+</head>
+<body>
+<input type="file" name="" id="horse-selfie" value="Click">
+</body>
+</html>
